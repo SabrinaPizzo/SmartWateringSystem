@@ -1,0 +1,25 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace SmartWateringSystem.DataService
+{
+    public interface IDataService
+    {
+        bool HighLimit { get; }
+        int InletPumpSpeed { get; }
+        bool LowLimit { get; }
+        int OutletPumpSpeed { get; }
+        bool PumpState { get; }
+        TimeSpan ScanTime { get; }
+        int TankLevel { get; }
+
+        event EventHandler ValuesRefreshed;
+
+        void Connect();
+        void Disconnect();
+        Task WriteSpeedInletPump(short speed);
+        Task WriteSpeedOutletPump(short speed);
+        Task WriteStart();
+        Task WriteStop();
+    }
+}
