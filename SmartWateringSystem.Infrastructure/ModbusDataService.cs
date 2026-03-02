@@ -170,6 +170,11 @@ namespace SmartWateringSystem.Infrastructure
 
         public async Task<bool> StopPumpAsync(CancellationToken ct = default)
         {
+            if (ConnectionStatus != EConnectionStatus.Connected)
+            {
+                return false;
+            }
+
             return await WriteCoilAsync(CoilPumpCommand, false, ct);
         }
 
